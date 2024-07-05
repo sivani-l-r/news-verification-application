@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>News Verification</title>
+    <style>
+        body {
+            background-color: #232525;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: white;
+        }
+        .title {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .top-bar {
+            background-color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .top-left {
+            display: flex;
+            align-items: center;
+        }
+        .top-left i {
+            margin-right: 8px;
+            color: #232525;
+        }
+        .top-left span {
+            font-style: italic;
+            color: #232525;
+        }
+        .top-right a {
+            color: #232525;
+            text-decoration: none;
+            font-style: italic;
+        }
+        .entry-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #2d2f30;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center; /* Center align content */
+        }
+        .entry-container .text-container {
+            width: 70%;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        .entry-container label {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .entry-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+        .entry-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 1px;
+            resize: none;
+            height: 200px; 
+            color: white;
+            background-color: #232525;
+            border: solid 1px green;
+        }
+        .url-entry {
+            width: 50%;
+            border: solid 2px green;
+            background-color: #232525;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .entry-container input[type="submit"] {
+            width: 50%;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            justify: center;
+        }
+        .entry-container input[type="submit"]:hover {
+            background-color: #0056b3;
+            padding-left: 10px
+        }
+        .entry-container span {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .entry-container .text-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: black;
+            border-radius: 10px;
+            border: solid 1px white;
+            max-width: 400px;
+            text-align: center;
+            margin: 0 auto; 
+            margin-bottom: 10px;
+        }
+        .result-container p {
+            color: white;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .result-container strong {
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-left">
+            <i class="fas fa-newspaper"></i>
+            <span>News Verifier</span>
+        </div>
+        <div class='top-right'>
+            <a href='#'><span>Github</span></a>
+        </div>
+    </div>
+    <h1 class="title">News Verifier</h1>
+    <div class='entry-container'>
+        <div class='url-container'>
+            <form action="/fetch" method="post">
+                <label for="url">URL</label>
+                <input class="url-entry" type="text" id="url" name="url">
+                <input type="submit" value="Fetch Content">
+            </form>
+        </div>
+        <span>OR</span>
+        <div class='text-container'>
+            <form action="/predict" method="post">
+                <label for="news-text">News</label>
+                <textarea id="news-text" name="news-text"></textarea>
+                <input type="submit" value="Check News">
+            </form>
+        </div>
+    </div>
+
+    {% if prediction %}
+    <div class="result-container">
+        <div class="prediction-container">
+            <p>Prediction: <strong>{{ prediction }}</strong></p>
+        </div>
+    </div>
+    {% endif %}
+    
+</body>
+</html>
